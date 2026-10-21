@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waterfront Resort Hotel, Kariba | 1551 Lake Drive</title>
+<meta name="description" content="Lakeside rooms, chalets and weekend packages on Lake Kariba. Get an instant quote and book via WhatsApp.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{navy:'#0A2540',gold:'#D4AF37',teal:'#008080',mist:'#F8FAFC',ink:'#1E293B'},fontFamily:{serif:['"Playfair Display"','serif'],sans:['Inter','sans-serif']}}}}
+</script>
+<style>
+html{scroll-behavior:smooth}
+.hero{background:linear-gradient(180deg,rgba(10,37,64,.45),rgba(10,37,64,.85)),url(images/sunset-pool.jpg) center/cover}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s}
+.faq-a.open{max-height:200px}
+:focus-visible{outline:3px solid #D4AF37;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.faq-a{transition:none}}
+</style>
+</head>
+<body class="font-sans text-ink bg-mist">
+
+<!-- TOP BAR -->
+<div class="bg-navy text-white text-xs sm:text-sm">
+  <div class="max-w-6xl mx-auto px-4 py-2 flex flex-wrap gap-x-5 gap-y-1 justify-between items-center">
+    <span><i class="fa-solid fa-location-dot text-gold mr-1"></i>1551 Lake Drive, Kariba, Zimbabwe</span>
+    <span class="hidden sm:inline"><i class="fa-solid fa-phone text-gold mr-1"></i>+263 781 823 056 / +263 772 132 180</span>
+    <span class="hidden md:inline"><i class="fa-solid fa-envelope text-gold mr-1"></i>reservations@waterfrontresort.co.zw</span>
+    <a href="https://wa.me/263781823056" class="font-semibold text-gold hover:underline"><i class="fa-brands fa-whatsapp mr-1"></i>WhatsApp us</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur shadow-sm">
+  <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between" aria-label="Main">
+    <a href="#overview" class="font-serif text-lg sm:text-xl font-bold text-navy">Waterfront Resort Hotel</a>
+    <ul class="hidden lg:flex gap-6 text-sm font-medium">
+      <li><a class="hover:text-teal" href="#overview">Overview</a></li>
+      <li><a class="hover:text-teal" href="#rooms">Rooms &amp; Rates</a></li>
+      <li><a class="hover:text-teal" href="#amenities">Amenities</a></li>
+      <li><a class="hover:text-teal" href="#packages">Weekend Packages</a></li>
+      <li><a class="hover:text-teal" href="#quote">Instant Quote</a></li>
+      <li><a class="hover:text-teal" href="#contact">Contact</a></li>
+    </ul>
+    <a href="#quote" class="hidden lg:inline-block bg-gold text-navy font-semibold px-5 py-2 rounded hover:brightness-95">Instant Booking</a>
+    <button id="menuBtn" class="lg:hidden text-navy text-2xl" aria-label="Toggle menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+  </nav>
+  <div id="mobileMenu" class="hidden lg:hidden border-t bg-white px-4 py-3 space-y-3 text-sm font-medium">
+    <a class="block" href="#overview">Overview</a><a class="block" href="#rooms">Rooms &amp; Rates</a>
+    <a class="block" href="#amenities">Amenities</a><a class="block" href="#packages">Weekend Packages</a>
+    <a class="block" href="#quote">Instant Quote</a><a class="block" href="#contact">Contact</a>
+    <a href="#quote" class="block text-center bg-gold text-navy font-semibold px-5 py-2 rounded">Instant Booking</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero text-white relative">
+  <div class="max-w-6xl mx-auto px-4 pt-20 pb-40 sm:pt-28">
+    <h1 class="font-serif text-4xl sm:text-6xl font-bold max-w-3xl leading-tight">Escape to Paradise on the Shores of Lake Kariba</h1>
+    <p class="mt-5 max-w-xl text-lg text-white/90">Experience 360° lakeside views, tranquil luxury, and unforgettable African sunsets at Kariba’s premier waterfront resort.</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="#quote" class="bg-gold text-navy font-semibold px-6 py-3 rounded">Get an instant quote</a>
+      <a href="#rooms" class="border border-white/70 px-6 py-3 rounded hover:bg-white/10">See rooms &amp; rates</a>
+    </div>
+  </div>
+  <!-- Quick availability widget -->
+  <div class="max-w-5xl mx-auto px-4 -mb-16 relative translate-y-0">
+    <form id="heroForm" class="absolute left-4 right-4 -bottom-16 bg-white text-ink rounded-lg shadow-xl p-4 grid grid-cols-2 md:grid-cols-5 gap-3 items-end" onsubmit="return false">
+      <label class="text-xs font-medium col-span-2 md:col-span-1">Room
+        <select id="hRoom" class="mt-1 w-full border rounded p-2 text-sm"></select></label>
+      <label class="text-xs font-medium">Guests
+        <input id="hGuests" type="number" min="1" max="20" value="2" class="mt-1 w-full border rounded p-2 text-sm"></label>
+      <label class="text-xs font-medium">Nights
+        <input id="hNights" type="number" min="1" max="30" value="2" class="mt-1 w-full border rounded p-2 text-sm"></label>
+      <label class="text-xs font-medium col-span-2 md:col-span-1">Arrival (optional)
+        <input id="hDate" type="date" class="mt-1 w-full border rounded p-2 text-sm"></label>
+      <button id="hGo" class="col-span-2 md:col-span-1 bg-teal text-white font-semibold rounded p-2.5">Check my price</button>
+    </form>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview" class="max-w-6xl mx-auto px-4 pt-32 pb-16">
+  <h2 class="font-serif text-3xl text-navy font-bold">A lakefront stay, planned around you</h2>
+  <p class="mt-3 max-w-2xl">Rooms, chalets and a private lodge on Lake Drive, close to the Kariba Dam Wall, the Heights Viewpoint and St. Barbara Church.</p>
+  <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="bg-white p-6 rounded-lg border"><i class="fa-solid fa-water text-teal text-2xl"></i><h3 class="font-semibold mt-3">360° Lake Views</h3><p class="text-sm mt-1">Breakfast and sundowners on the elevated deck.</p></div>
+    <div class="bg-white p-6 rounded-lg border"><i class="fa-solid fa-fish text-teal text-2xl"></i><h3 class="font-semibold mt-3">Fine Lakeside Dining</h3><p class="text-sm mt-1">Freshly caught Kariba bream and à la carte favourites.</p></div>
+    <div class="bg-white p-6 rounded-lg border"><i class="fa-solid fa-person-swimming text-teal text-2xl"></i><h3 class="font-semibold mt-3">Pool &amp; Tropical Gardens</h3><p class="text-sm mt-1">Lawns, loungers and braai areas for the whole family.</p></div>
+    <div class="bg-white p-6 rounded-lg border"><i class="fa-solid fa-people-group text-teal text-2xl"></i><h3 class="font-semibold mt-3">Conference &amp; Events</h3><p class="text-sm mt-1">Halls, outdoor lawns and audiovisual support.</p></div>
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section id="rooms" class="bg-white py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="font-serif text-3xl text-navy font-bold">Rooms &amp; rates</h2>
+    <p class="mt-2 text-sm">Rates in USD per night. Children under 5 stay free; ages 5–12 pay 50% of the adult rate when sharing.</p>
+    <div class="mt-6 flex flex-wrap gap-2" role="tablist" id="filters">
+      <button data-f="all" class="filter px-4 py-2 rounded-full text-sm bg-navy text-white">All Rooms</button>
+      <button data-f="standard" class="filter px-4 py-2 rounded-full text-sm bg-mist border">Standard</button>
+      <button data-f="executive" class="filter px-4 py-2 rounded-full text-sm bg-mist border">Executive</button>
+      <button data-f="family" class="filter px-4 py-2 rounded-full text-sm bg-mist border">Family Chalets</button>
+    </div>
+    <div id="roomGrid" class="mt-8 grid md:grid-cols-2 gap-6"></div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="quote" class="py-16">
+  <div class="max-w-4xl mx-auto px-4">
+    <h2 class="font-serif text-3xl text-navy font-bold">Instant quote</h2>
+    <p class="mt-2">Pick your stay and see an estimate straight away. Send it to our sales desk on WhatsApp to confirm availability.</p>
+    <div class="mt-8 grid md:grid-cols-2 gap-6 bg-white border rounded-lg p-6">
+      <div class="space-y-4">
+        <label class="block text-sm font-medium">Room type<select id="qRoom" class="mt-1 w-full border rounded p-2"></select></label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block text-sm font-medium">Guests<input id="qGuests" type="number" min="1" max="20" value="2" class="mt-1 w-full border rounded p-2"></label>
+          <label class="block text-sm font-medium">Nights<input id="qNights" type="number" min="1" max="30" value="2" class="mt-1 w-full border rounded p-2"></label>
+        </div>
+        <fieldset class="space-y-2 text-sm">
+          <legend class="font-medium mb-1">Add-ons</legend>
+          <label class="flex items-center gap-2"><input type="checkbox" class="addon" data-name="Sunset Cruise" data-price="30" data-mode="pp"> Sunset Cruise (+$30 per person)</label>
+          <label class="flex items-center gap-2"><input type="checkbox" class="addon" data-name="Dam Wall Tour" data-price="15" data-mode="pp"> Dam Wall Tour (+$15 per person)</label>
+          <label class="flex items-center gap-2"><input type="checkbox" class="addon" data-name="All Meals" data-price="40" data-mode="day"> All Meals (+$40 per day)</label>
+        </fieldset>
+      </div>
+      <div class="bg-navy text-white rounded-lg p-6 flex flex-col">
+        <p class="text-sm text-white/70">Estimated total</p>
+        <p id="qTotal" class="font-serif text-5xl font-bold text-gold mt-1" aria-live="polite">$0</p>
+        <ul id="qLines" class="mt-4 text-sm space-y-1 text-white/90"></ul>
+        <a id="qWa" href="#" target="_blank" rel="noopener" class="mt-auto pt-6"><span class="block text-center bg-gold text-navy font-semibold rounded py-3"><i class="fa-brands fa-whatsapp mr-1"></i>Book This Estimate via WhatsApp</span></a>
+        <p class="text-xs text-white/60 mt-3">Estimate only. Final rates and availability are confirmed by the resort.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" class="bg-navy text-white py-16">
+  <div class="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h2 class="font-serif text-3xl font-bold">The $190 Harare Weekend Getaway Special</h2>
+      <p class="mt-3 text-white/80">3 days / 2 nights, all inclusive, from $190 per person. Arranged with partner tour operators.</p>
+      <a id="pkgWa" href="https://wa.me/263781823056?text=Hi%20Waterfront%20Resort%2C%20I%27d%20like%20to%20book%20the%20%24190%20Harare%20Weekend%20Getaway%20Special." target="_blank" rel="noopener" class="inline-block mt-6 bg-gold text-navy font-semibold px-6 py-3 rounded">Book this package</a>
+    </div>
+    <ul class="space-y-2 text-sm">
+      <li><i class="fa-solid fa-check text-gold mr-2"></i>Return transport from Harare</li>
+      <li><i class="fa-solid fa-check text-gold mr-2"></i>2 nights accommodation</li>
+      <li><i class="fa-solid fa-check text-gold mr-2"></i>All meals</li>
+      <li><i class="fa-solid fa-check text-gold mr-2"></i>Kariba Dam Wall tour</li>
+      <li><i class="fa-solid fa-check text-gold mr-2"></i>Heights Viewpoint visit</li>
+      <li><i class="fa-solid fa-check text-gold mr-2"></i>Crocodile farm tour</li>
+      <li><i class="fa-solid fa-check text-gold mr-2"></i>Sunset cruise on Lake Kariba</li>
+    </ul>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="max-w-6xl mx-auto px-4 py-16">
+  <h2 class="font-serif text-3xl text-navy font-bold">Around the resort</h2>
+  <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3"><img src="images/sunset-pool.jpg" alt="Sunset over Lake Kariba and the pool" loading="lazy" class="w-full h-40 sm:h-56 object-cover rounded-lg"><img src="images/boat.jpg" alt="Cruise boat on Lake Kariba" loading="lazy" class="w-full h-40 sm:h-56 object-cover rounded-lg"><img src="images/dining.jpg" alt="Kariba bream and grills" loading="lazy" class="w-full h-40 sm:h-56 object-cover rounded-lg"><img src="images/garden.jpg" alt="Resort gardens" loading="lazy" class="w-full h-40 sm:h-56 object-cover rounded-lg"><img src="images/conference-1.jpg" alt="Conference hall" loading="lazy" class="w-full h-40 sm:h-56 object-cover rounded-lg"><img src="images/conference-2.jpg" alt="Seminar setup" loading="lazy" class="w-full h-40 sm:h-56 object-cover rounded-lg"><img src="images/room-black.jpg" alt="Executive room" loading="lazy" class="w-full h-40 sm:h-56 object-cover rounded-lg"><img src="images/bathroom.jpg" alt="En-suite with garden view" loading="lazy" class="w-full h-40 sm:h-56 object-cover rounded-lg"></div>
+</section>
+
+<!-- SCHOOL PACKAGE -->
+<section class="bg-white py-16">
+  <div class="max-w-5xl mx-auto px-4">
+    <h2 class="font-serif text-3xl text-navy font-bold">School trip packages</h2>
+    <p class="mt-2 text-sm">Prices in USD per student unless stated. Ask for a group quote on WhatsApp.</p>
+    <div class="mt-6 grid md:grid-cols-3 gap-5 text-sm">
+      <div class="bg-mist border rounded-lg p-5"><h3 class="font-semibold text-navy">Accommodation</h3><ul class="mt-2 space-y-1"><li>Dormitory: $10 primary, $12 secondary</li><li>Rooms: $15 primary, $20 secondary</li><li>Teachers sharing: $25 each</li></ul></div>
+      <div class="bg-mist border rounded-lg p-5"><h3 class="font-semibold text-navy">Meals (each)</h3><ul class="mt-2 space-y-1"><li>Breakfast, lunch, dinner</li><li>Primary: $8 per meal</li><li>Secondary: $10 per meal</li></ul></div>
+      <div class="bg-mist border rounded-lg p-5"><h3 class="font-semibold text-navy">Activities: $10 each</h3><ul class="mt-2 space-y-1"><li>Sunset cruise</li><li>Quad bikes</li><li>Game drive</li><li>Zip liner</li></ul></div>
+    </div>
+    <a href="https://wa.me/263781823056?text=Hi%20Waterfront%20Resort%2C%20please%20send%20a%20school%20package%20quote." target="_blank" rel="noopener" class="inline-block mt-6 bg-teal text-white font-semibold px-6 py-3 rounded">Request a school quote</a>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section id="amenities" class="max-w-6xl mx-auto px-4 py-16">
+  <h2 class="font-serif text-3xl text-navy font-bold">Amenities &amp; experiences</h2>
+  <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+    <div class="bg-white border rounded-lg p-5"><i class="fa-solid fa-person-swimming text-teal text-2xl"></i><p class="mt-2 text-sm font-medium">Swimming Pool</p></div>
+    <div class="bg-white border rounded-lg p-5"><i class="fa-solid fa-fire-burner text-teal text-2xl"></i><p class="mt-2 text-sm font-medium">Braai BBQ Area</p></div>
+    <div class="bg-white border rounded-lg p-5"><i class="fa-solid fa-utensils text-teal text-2xl"></i><p class="mt-2 text-sm font-medium">Waterfront Restaurant &amp; Bar</p></div>
+    <div class="bg-white border rounded-lg p-5"><i class="fa-solid fa-wifi text-teal text-2xl"></i><p class="mt-2 text-sm font-medium">Free Wi-Fi</p></div>
+    <div class="bg-white border rounded-lg p-5"><i class="fa-solid fa-shield-halved text-teal text-2xl"></i><p class="mt-2 text-sm font-medium">24/7 Security</p></div>
+    <div class="bg-white border rounded-lg p-5"><i class="fa-solid fa-sailboat text-teal text-2xl"></i><p class="mt-2 text-sm font-medium">Boat Cruises</p></div>
+    <div class="bg-white border rounded-lg p-5"><i class="fa-solid fa-fish-fins text-teal text-2xl"></i><p class="mt-2 text-sm font-medium">Tiger Fishing Trips</p></div>
+    <div class="bg-white border rounded-lg p-5"><i class="fa-solid fa-binoculars text-teal text-2xl"></i><p class="mt-2 text-sm font-medium">Wildlife Sightseeing</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS (sample copy: replace with real guest reviews) -->
+<section class="bg-white py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="font-serif text-3xl text-navy font-bold">What guests say</h2>
+    <div class="mt-8 grid md:grid-cols-3 gap-6">
+      <figure class="bg-mist border rounded-lg p-6"><blockquote class="text-sm">The view from the deck at sunset is something you remember. We had breakfast looking over the whole lake.</blockquote><figcaption class="mt-4 text-sm font-semibold">Sample review · Harare family</figcaption></figure>
+      <figure class="bg-mist border rounded-lg p-6"><blockquote class="text-sm">Best Kariba bream we’ve eaten, and the staff looked after our children like their own.</blockquote><figcaption class="mt-4 text-sm font-semibold">Sample review · Weekend guests</figcaption></figure>
+      <figure class="bg-mist border rounded-lg p-6"><blockquote class="text-sm">Quiet, relaxed and easy to organise our team seminar. The chalets were spotless.</blockquote><figcaption class="mt-4 text-sm font-semibold">Sample review · Corporate group</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="max-w-3xl mx-auto px-4 py-16">
+  <h2 class="font-serif text-3xl text-navy font-bold">Quick answers</h2>
+  <div class="mt-6 divide-y border rounded-lg bg-white">
+    <div><button class="faq-q w-full text-left p-4 font-medium flex justify-between" aria-expanded="false">Do children pay?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a px-4 text-sm"><p class="pb-4">Children under 5 stay free. Ages 5–12 pay 50% of the adult rate when sharing with parents.</p></div></div>
+    <div><button class="faq-q w-full text-left p-4 font-medium flex justify-between" aria-expanded="false">Can I self-cater?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a px-4 text-sm"><p class="pb-4">Yes. Family chalets are fully equipped with a kitchen and private lounge. The Full Lodge comes with a dedicated chef.</p></div></div>
+    <div><button class="faq-q w-full text-left p-4 font-medium flex justify-between" aria-expanded="false">Do you host conferences?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a px-4 text-sm"><p class="pb-4">Yes. We have conference halls, outdoor event lawns and audiovisual support. WhatsApp us for a group quote.</p></div></div>
+    <div><button class="faq-q w-full text-left p-4 font-medium flex justify-between" aria-expanded="false">How do I confirm a booking?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a px-4 text-sm"><p class="pb-4">Use the Instant Quote above. It opens WhatsApp with your details filled in, and our sales desk confirms availability.</p></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact" class="bg-navy text-white/90">
+  <div class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-8 text-sm">
+    <div><p class="font-serif text-xl text-white font-bold">Waterfront Resort Hotel</p><p class="mt-2">Lakeside rooms, chalets, dining and events on Lake Kariba.</p><p class="mt-3 text-gold">#waterfrontkba #karibamanake #visitkariba</p></div>
+    <div class="space-y-2"><p class="font-semibold text-white">Contact</p>
+      <p><i class="fa-solid fa-location-dot text-gold mr-2"></i>1551 Lake Drive, Kariba, Zimbabwe</p>
+      <p><i class="fa-solid fa-phone text-gold mr-2"></i>+263 781 823 056 / +263 772 132 180</p>
+      <p><i class="fa-solid fa-envelope text-gold mr-2"></i><a href="mailto:reservations@waterfrontresort.co.zw">reservations@waterfrontresort.co.zw</a></p></div>
+    <div class="space-y-2"><p class="font-semibold text-white">Follow &amp; book</p>
+      <p><a href="https://www.facebook.com/waterfrontresorthotel" target="_blank" rel="noopener"><i class="fa-brands fa-facebook text-gold mr-2"></i>Facebook @waterfrontresorthotel</a></p>
+      <p><a href="https://wa.me/263781823056" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp text-gold mr-2"></i>WhatsApp sales desk</a></p>
+      <p>waterfrontresort.co.zw</p></div>
+  </div>
+  <div class="border-t border-white/10 text-center text-xs py-4 text-white/60">© 2026 Waterfront Resort Hotel. Website prototype by Local Edge Digital Agency.</div>
+</footer>
+
+<script>
+/* ---------- Data ---------- */
+const WA = '263781823056';
+const ROOMS = [
+  {id:'standard', img:'images/room-standard.jpg', cat:'standard', name:'Standard Room', price:75, unit:'per night B&B', alt:'$65 Bed Only', cap:2,
+   tags:['Aircon','En-suite','DSTV','Garden/lake view']},
+  {id:'executive', img:'images/room-executive.jpg', cat:'executive', name:'Executive Deluxe Suite', price:130, unit:'per night B&B sharing', alt:'', cap:2,
+   tags:['Premium lake views','Private balcony','King bed','Work desk']},
+  {id:'chalet', img:'images/room-family.jpg', cat:'family', name:'Family Chalet (Self-Catering)', price:200, unit:'per night B&B', alt:'$180 self-catering (4 pax)', cap:4,
+   tags:['2 bedrooms','Full kitchen','Private lounge']},
+  {id:'lodge', img:'images/room-lodge.jpg', cat:'family', name:'Full Lodge Exclusive Use', price:550, unit:'per night, from (up to $800)', alt:'', cap:99,
+   tags:['Private chef','Exclusive pool access','Full capacity']}
+];
+const byId = id => ROOMS.find(r => r.id === id);
+
+/* ---------- Mobile menu ---------- */
+const menuBtn = document.getElementById('menuBtn'), mm = document.getElementById('mobileMenu');
+menuBtn.onclick = () => { mm.classList.toggle('hidden'); menuBtn.setAttribute('aria-expanded', !mm.classList.contains('hidden')); };
+mm.querySelectorAll('a').forEach(a => a.onclick = () => mm.classList.add('hidden'));
+
+/* ---------- Room cards + filter ---------- */
+const grid = document.getElementById('roomGrid');
+function renderRooms(f){
+  grid.innerHTML = ROOMS.filter(r => f==='all' || r.cat===f).map(r => `
+    <article class="border rounded-lg p-6 bg-mist flex flex-col">
+      <img src="${r.img}" alt="${r.name}" loading="lazy" class="w-full h-52 object-cover rounded mb-4">
+      <h3 class="font-serif text-xl text-navy font-bold">${r.name}</h3>
+      <p class="mt-2"><span class="text-3xl font-bold text-teal">$${r.price}</span> <span class="text-sm">${r.unit}</span></p>
+      ${r.alt ? `<p class="text-sm text-ink/70">${r.alt}</p>` : ''}
+      <div class="flex flex-wrap gap-2 mt-4">${r.tags.map(t=>`<span class="text-xs bg-white border rounded-full px-3 py-1">${t}</span>`).join('')}</div>
+      <button data-room="${r.id}" class="select-room mt-6 bg-navy text-white font-semibold rounded py-2.5">Select for Booking</button>
+    </article>`).join('');
+}
+renderRooms('all');
+document.querySelectorAll('.filter').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.filter').forEach(x => x.className = 'filter px-4 py-2 rounded-full text-sm bg-mist border');
+  b.className = 'filter px-4 py-2 rounded-full text-sm bg-navy text-white';
+  renderRooms(b.dataset.f);
+});
+
+/* ---------- Calculator ---------- */
+const qRoom = document.getElementById('qRoom'), hRoom = document.getElementById('hRoom');
+const opts = ROOMS.map(r => `<option value="${r.id}">${r.name} ($${r.price})</option>`).join('');
+qRoom.innerHTML = opts; hRoom.innerHTML = opts;
+const qGuests = document.getElementById('qGuests'), qNights = document.getElementById('qNights');
+
+function calc(){
+  const r = byId(qRoom.value);
+  const g = Math.max(1, +qGuests.value || 1), n = Math.max(1, +qNights.value || 1);
+  const units = r.cap === 99 ? 1 : Math.ceil(g / r.cap);
+  let total = r.price * units * n;
+  const lines = [`${units} × ${r.name} × ${n} night${n>1?'s':''}: $${total}`];
+  const names = [];
+  document.querySelectorAll('.addon:checked').forEach(a => {
+    const p = +a.dataset.price, cost = a.dataset.mode === 'pp' ? p * g : p * n;
+    total += cost; names.push(a.dataset.name); lines.push(`${a.dataset.name}: $${cost}`);
+  });
+  document.getElementById('qTotal').textContent = '$' + total;
+  document.getElementById('qLines').innerHTML = lines.map(l => `<li>${l}</li>`).join('');
+  const msg = `Hi Waterfront Resort, I would like to book a ${r.name} for ${n} night${n>1?'s':''}, ${g} guest${g>1?'s':''}` +
+    (names.length ? ` with ${names.join(', ')}` : '') + `. Total estimate: $${total}`;
+  document.getElementById('qWa').href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+}
+[qRoom, qGuests, qNights].forEach(e => e.addEventListener('input', calc));
+document.querySelectorAll('.addon').forEach(e => e.addEventListener('change', calc));
+
+/* Card button and hero widget feed the calculator */
+function toQuote(){ calc(); document.getElementById('quote').scrollIntoView({behavior:'smooth'}); }
+grid.addEventListener('click', e => { const b = e.target.closest('.select-room'); if(b){ qRoom.value = b.dataset.room; toQuote(); } });
+document.getElementById('hGo').onclick = () => { qRoom.value = hRoom.value; qGuests.value = document.getElementById('hGuests').value; qNights.value = document.getElementById('hNights').value; toQuote(); };
+calc();
+
+/* ---------- FAQ ---------- */
+document.querySelectorAll('.faq-q').forEach(q => q.onclick = () => {
+  const a = q.nextElementSibling, open = a.classList.toggle('open');
+  q.setAttribute('aria-expanded', open);
+});
+</script>
+</body>
+</html>
