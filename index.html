@@ -16,11 +16,14 @@ html{scroll-behavior:smooth}
 .hero{background:linear-gradient(180deg,rgba(10,37,64,.45),rgba(10,37,64,.85)),url(images/sunset-pool.jpg) center/cover}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .3s}
 .faq-a.open{max-height:200px}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}.rv.in{opacity:1;transform:none}@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 :focus-visible{outline:3px solid #D4AF37;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.faq-a{transition:none}}
 </style>
+<meta property="og:title" content="Waterfront Resort Hotel, Kariba"><meta property="og:description" content="Lakeside rooms, chalets and weekend packages. Get an instant quote and book on WhatsApp."><meta property="og:image" content="images/sunset-pool.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Hotel","name":"Waterfront Resort Hotel","address":{"@type":"PostalAddress","streetAddress":"1551 Lake Drive","addressLocality":"Kariba","addressCountry":"ZW"},"telephone":"+263781823056","email":"reservations@waterfrontresort.co.zw","url":"https://waterfrontresort.co.zw","image":"images/sunset-pool.jpg"}</script>
 </head>
-<body class="font-sans text-ink bg-mist">
+<body class="font-sans text-ink bg-mist pb-16 lg:pb-0">
 
 <!-- TOP BAR -->
 <div class="bg-navy text-white text-xs sm:text-sm">
@@ -93,6 +96,13 @@ html{scroll-behavior:smooth}
   </div>
 </section>
 
+<!-- WHY BOOK -->
+<section class="bg-navy text-white"><div class="max-w-6xl mx-auto px-4 py-8 grid sm:grid-cols-3 gap-6 text-sm">
+<div><i class="fa-solid fa-bolt text-gold text-xl"></i><p class="mt-2 font-semibold">Price in seconds</p><p class="text-white/70">No waiting for a reply to see what your stay costs.</p></div>
+<div><i class="fa-brands fa-whatsapp text-gold text-xl"></i><p class="mt-2 font-semibold">Straight to our sales desk</p><p class="text-white/70">Your dates, guests and extras arrive pre-filled.</p></div>
+<div><i class="fa-solid fa-ship text-gold text-xl"></i><p class="mt-2 font-semibold">Cruises and tours in one quote</p><p class="text-white/70">Add sunset cruises, dam wall tours and meals as you go.</p></div>
+</div></section>
+
 <!-- ROOMS -->
 <section id="rooms" class="bg-white py-16">
   <div class="max-w-6xl mx-auto px-4">
@@ -117,9 +127,14 @@ html{scroll-behavior:smooth}
       <div class="space-y-4">
         <label class="block text-sm font-medium">Room type<select id="qRoom" class="mt-1 w-full border rounded p-2"></select></label>
         <div class="grid grid-cols-2 gap-3">
-          <label class="block text-sm font-medium">Guests<input id="qGuests" type="number" min="1" max="20" value="2" class="mt-1 w-full border rounded p-2"></label>
+          <label class="block text-sm font-medium">Check-in<input id="qIn" type="date" class="mt-1 w-full border rounded p-2"></label>
+          <label class="block text-sm font-medium">Check-out<input id="qOut" type="date" class="mt-1 w-full border rounded p-2"></label>
+          <label class="block text-sm font-medium">Adults<input id="qGuests" type="number" min="1" max="20" value="2" class="mt-1 w-full border rounded p-2"></label>
+          <label class="block text-sm font-medium">Children 5–12<input id="qKids" type="number" min="0" max="20" value="0" class="mt-1 w-full border rounded p-2"></label>
           <label class="block text-sm font-medium">Nights<input id="qNights" type="number" min="1" max="30" value="2" class="mt-1 w-full border rounded p-2"></label>
+          <label class="block text-sm font-medium">Your name (optional)<input id="qName" type="text" maxlength="40" class="mt-1 w-full border rounded p-2"></label>
         </div>
+        <p class="text-xs text-ink/60">Children under 5 stay free. Ages 5–12 pay 50% of the per-person rate.</p>
         <fieldset class="space-y-2 text-sm">
           <legend class="font-medium mb-1">Add-ons</legend>
           <label class="flex items-center gap-2"><input type="checkbox" class="addon" data-name="Sunset Cruise" data-price="30" data-mode="pp"> Sunset Cruise (+$30 per person)</label>
@@ -132,6 +147,7 @@ html{scroll-behavior:smooth}
         <p id="qTotal" class="font-serif text-5xl font-bold text-gold mt-1" aria-live="polite">$0</p>
         <ul id="qLines" class="mt-4 text-sm space-y-1 text-white/90"></ul>
         <a id="qWa" href="#" target="_blank" rel="noopener" class="mt-auto pt-6"><span class="block text-center bg-gold text-navy font-semibold rounded py-3"><i class="fa-brands fa-whatsapp mr-1"></i>Book This Estimate via WhatsApp</span></a>
+        <button id="qCopy" type="button" class="mt-3 text-sm underline text-white/80">Copy a link to this quote</button>
         <p class="text-xs text-white/60 mt-3">Estimate only. Final rates and availability are confirmed by the resort.</p>
       </div>
     </div>
@@ -144,7 +160,11 @@ html{scroll-behavior:smooth}
     <div>
       <h2 class="font-serif text-3xl font-bold">The $190 Harare Weekend Getaway Special</h2>
       <p class="mt-3 text-white/80">3 days / 2 nights, all inclusive, from $190 per person. Arranged with partner tour operators.</p>
-      <a id="pkgWa" href="https://wa.me/263781823056?text=Hi%20Waterfront%20Resort%2C%20I%27d%20like%20to%20book%20the%20%24190%20Harare%20Weekend%20Getaway%20Special." target="_blank" rel="noopener" class="inline-block mt-6 bg-gold text-navy font-semibold px-6 py-3 rounded">Book this package</a>
+      <div class="mt-6 bg-white/10 rounded-lg p-4 flex flex-wrap gap-3 items-end text-sm">
+        <label>Adults<input id="pkgA" type="number" min="1" max="50" value="2" class="block mt-1 w-20 rounded p-2 text-ink"></label>
+        <label>Children 5–12<input id="pkgK" type="number" min="0" max="50" value="0" class="block mt-1 w-24 rounded p-2 text-ink"></label>
+        <p class="ml-auto text-right">Estimate<br><span id="pkgTotal" class="font-serif text-3xl text-gold">$380</span></p></div>
+      <a id="pkgWa" href="#" target="_blank" rel="noopener" class="inline-block mt-4 bg-gold text-navy font-semibold px-6 py-3 rounded">Book this package</a>
     </div>
     <ul class="space-y-2 text-sm">
       <li><i class="fa-solid fa-check text-gold mr-2"></i>Return transport from Harare</li>
@@ -221,7 +241,7 @@ html{scroll-behavior:smooth}
   <div class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-8 text-sm">
     <div><p class="font-serif text-xl text-white font-bold">Waterfront Resort Hotel</p><p class="mt-2">Lakeside rooms, chalets, dining and events on Lake Kariba.</p><p class="mt-3 text-gold">#waterfrontkba #karibamanake #visitkariba</p></div>
     <div class="space-y-2"><p class="font-semibold text-white">Contact</p>
-      <p><i class="fa-solid fa-location-dot text-gold mr-2"></i>1551 Lake Drive, Kariba, Zimbabwe</p>
+      <p><a href="https://www.google.com/maps/search/?api=1&query=Waterfront+Resort+1551+Lake+Drive+Kariba" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot text-gold mr-2"></i>1551 Lake Drive, Kariba, Zimbabwe (open map)</a></p>
       <p><i class="fa-solid fa-phone text-gold mr-2"></i>+263 781 823 056 / +263 772 132 180</p>
       <p><i class="fa-solid fa-envelope text-gold mr-2"></i><a href="mailto:reservations@waterfrontresort.co.zw">reservations@waterfrontresort.co.zw</a></p></div>
     <div class="space-y-2"><p class="font-semibold text-white">Follow &amp; book</p>
@@ -232,6 +252,12 @@ html{scroll-behavior:smooth}
   <div class="border-t border-white/10 text-center text-xs py-4 text-white/60">© 2026 Waterfront Resort Hotel. Website prototype by Local Edge Digital Agency.</div>
 </footer>
 
+<!-- Sticky CTA -->
+<div class="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-lg flex gap-2 p-2">
+  <a href="#quote" class="flex-1 text-center bg-navy text-white font-semibold rounded py-3 text-sm">Instant quote</a>
+  <a href="https://wa.me/263781823056" target="_blank" rel="noopener" class="flex-1 text-center bg-[#25D366] text-white font-semibold rounded py-3 text-sm"><i class="fa-brands fa-whatsapp mr-1"></i>WhatsApp</a>
+</div>
+<a href="https://wa.me/263781823056" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="hidden lg:flex fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white text-3xl items-center justify-center shadow-xl"><i class="fa-brands fa-whatsapp"></i></a>
 <script>
 /* ---------- Data ---------- */
 const WA = '263781823056';
@@ -273,36 +299,71 @@ document.querySelectorAll('.filter').forEach(b => b.onclick = () => {
 });
 
 /* ---------- Calculator ---------- */
-const qRoom = document.getElementById('qRoom'), hRoom = document.getElementById('hRoom');
-const opts = ROOMS.map(r => `<option value="${r.id}">${r.name} ($${r.price})</option>`).join('');
-qRoom.innerHTML = opts; hRoom.innerHTML = opts;
-const qGuests = document.getElementById('qGuests'), qNights = document.getElementById('qNights');
-
-function calc(){
-  const r = byId(qRoom.value);
-  const g = Math.max(1, +qGuests.value || 1), n = Math.max(1, +qNights.value || 1);
-  const units = r.cap === 99 ? 1 : Math.ceil(g / r.cap);
-  let total = r.price * units * n;
-  const lines = [`${units} × ${r.name} × ${n} night${n>1?'s':''}: $${total}`];
-  const names = [];
-  document.querySelectorAll('.addon:checked').forEach(a => {
-    const p = +a.dataset.price, cost = a.dataset.mode === 'pp' ? p * g : p * n;
-    total += cost; names.push(a.dataset.name); lines.push(`${a.dataset.name}: $${cost}`);
-  });
-  document.getElementById('qTotal').textContent = '$' + total;
-  document.getElementById('qLines').innerHTML = lines.map(l => `<li>${l}</li>`).join('');
-  const msg = `Hi Waterfront Resort, I would like to book a ${r.name} for ${n} night${n>1?'s':''}, ${g} guest${g>1?'s':''}` +
-    (names.length ? ` with ${names.join(', ')}` : '') + `. Total estimate: $${total}`;
-  document.getElementById('qWa').href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+const $=id=>document.getElementById(id);
+const REF='WF-'+Math.random().toString(36).slice(2,6).toUpperCase();
+const qRoom=$('qRoom'),hRoom=$('hRoom'),qGuests=$('qGuests'),qKids=$('qKids'),qNights=$('qNights'),qIn=$('qIn'),qOut=$('qOut'),qName=$('qName');
+const opts=ROOMS.map(r=>`<option value="${r.id}">${r.name} ($${r.price})</option>`).join('');
+qRoom.innerHTML=opts;hRoom.innerHTML=opts;
+const today=new Date().toISOString().slice(0,10);qIn.min=today;qOut.min=today;
+const fmt=d=>new Date(d+'T00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+function syncDates(){
+  if(qIn.value){qOut.min=qIn.value}
+  if(qIn.value&&qOut.value){const n=Math.round((new Date(qOut.value)-new Date(qIn.value))/864e5);if(n>0)qNights.value=Math.min(n,30);else qOut.value=''}
 }
-[qRoom, qGuests, qNights].forEach(e => e.addEventListener('input', calc));
-document.querySelectorAll('.addon').forEach(e => e.addEventListener('change', calc));
-
-/* Card button and hero widget feed the calculator */
-function toQuote(){ calc(); document.getElementById('quote').scrollIntoView({behavior:'smooth'}); }
-grid.addEventListener('click', e => { const b = e.target.closest('.select-room'); if(b){ qRoom.value = b.dataset.room; toQuote(); } });
-document.getElementById('hGo').onclick = () => { qRoom.value = hRoom.value; qGuests.value = document.getElementById('hGuests').value; qNights.value = document.getElementById('hNights').value; toQuote(); };
+function calc(){
+  const r=byId(qRoom.value);
+  const a=Math.max(1,+qGuests.value||1),k=Math.max(0,+qKids.value||0),n=Math.max(1,+qNights.value||1);
+  const units=r.cap===99?1:Math.ceil((a+k)/r.cap);
+  const base=r.price*units*n;let total=base;
+  const lines=[`${units} × ${r.name} × ${n} night${n>1?'s':''}: $${base}`];const names=[];
+  document.querySelectorAll('.addon:checked').forEach(x=>{
+    const p=+x.dataset.price,c=x.dataset.mode==='pp'?p*(a+k*.5):p*n;
+    total+=c;names.push(x.dataset.name);lines.push(`${x.dataset.name}: $${c%1?c.toFixed(2):c}`);
+  });
+  total=Math.round(total*100)/100;
+  $('qTotal').textContent='$'+total;
+  $('qLines').innerHTML=lines.map(l=>`<li>${l}</li>`).join('')+`<li class="pt-1 text-white/60">About $${Math.round(total/(a+k))} per person</li>`;
+  const when=qIn.value&&qOut.value?`${fmt(qIn.value)} to ${fmt(qOut.value)} (${n} night${n>1?'s':''})`:`${n} night${n>1?'s':''}`;
+  const who=`${a} adult${a>1?'s':''}`+(k?` and ${k} child${k>1?'ren':''}`:'');
+  const nm=qName.value.trim();
+  const msg=`Hi Waterfront Resort, ${nm?'this is '+nm+'. ':''}I would like to book a ${r.name} for ${when}, ${who}`+(names.length?` with ${names.join(', ')}`:'')+`. Total estimate: $${total}. Ref: ${REF} (via website)`;
+  $('qWa').href=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+}
+[qRoom,qGuests,qKids,qNights,qName].forEach(e=>e.addEventListener('input',calc));
+[qIn,qOut].forEach(e=>e.addEventListener('change',()=>{syncDates();calc()}));
+document.querySelectorAll('.addon').forEach(e=>e.addEventListener('change',calc));
+function toQuote(){calc();$('quote').scrollIntoView({behavior:'smooth'})}
+grid.addEventListener('click',e=>{const b=e.target.closest('.select-room');if(b){qRoom.value=b.dataset.room;toQuote()}});
+$('hGo').onclick=()=>{
+  qRoom.value=hRoom.value;qGuests.value=$('hGuests').value;qNights.value=$('hNights').value;
+  if($('hDate').value){qIn.value=$('hDate').value;const d=new Date(qIn.value);d.setDate(d.getDate()+(+qNights.value||1));qOut.value=d.toISOString().slice(0,10)}
+  toQuote();
+};
+$('qCopy').onclick=async()=>{
+  const u=new URL(location.href.split('#')[0]);u.search='';
+  u.searchParams.set('room',qRoom.value);u.searchParams.set('a',qGuests.value);u.searchParams.set('k',qKids.value);u.searchParams.set('n',qNights.value);
+  const link=u.toString()+'#quote';
+  try{await navigator.clipboard.writeText(link);$('qCopy').textContent='Link copied ✓'}catch(e){prompt('Copy this link',link)}
+};
+/* Prefill from link, e.g. ?room=executive&a=2&n=3 (use in Facebook posts and comment replies) */
+try{const q=new URLSearchParams(location.search);
+  if(byId(q.get('room')))qRoom.value=q.get('room');
+  if(q.get('a'))qGuests.value=q.get('a');if(q.get('k'))qKids.value=q.get('k');if(q.get('n'))qNights.value=q.get('n');}catch(e){}
 calc();
+
+/* ---------- Package estimator ---------- */
+function pkg(){
+  const a=Math.max(1,+$('pkgA').value||1),k=Math.max(0,+$('pkgK').value||0),t=190*a+95*k;
+  $('pkgTotal').textContent='$'+t;
+  $('pkgWa').href=`https://wa.me/${WA}?text=`+encodeURIComponent(`Hi Waterfront Resort, I'd like the $190 Harare Weekend Getaway for ${a} adult${a>1?'s':''}`+(k?` and ${k} child${k>1?'ren':''}`:'')+`. Estimate: $${t}. Ref: ${REF} (via website)`);
+}
+['pkgA','pkgK'].forEach(i=>$(i).addEventListener('input',pkg));pkg();
+
+/* ---------- Scroll reveal ---------- */
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+  document.querySelectorAll('section:not(.hero)').forEach(x=>{x.classList.add('rv');io.observe(x)});
+}
 
 /* ---------- FAQ ---------- */
 document.querySelectorAll('.faq-q').forEach(q => q.onclick = () => {
